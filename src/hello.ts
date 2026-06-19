@@ -1,9 +1,8 @@
 console.log("====自動販売機シミュレータ====");
 
-//////////////////
-// 商品一覧の管理 //
-//////////////////
-
+//////////////
+// 商品の管理 //
+//////////////
 
 // 商品クラスの宣言
 class Product{
@@ -97,3 +96,23 @@ console.log("---商品一覧---");
 products.forEach(product => {
   product.showInfo();
 });
+
+////////////////////////
+// 自動販売機の動作の管理 //
+////////////////////////
+
+// 自動販売機クラスの宣言
+class VendingMachine {
+  /* 合計投入金額の初期値 */
+  money: number;
+
+  // コンストラクタの定義
+  /* インスタンス生成直後に自動実行される */
+  constructor() {
+    this.money = 0;
+  }
+}
+
+// VendingMachineクラスのインスタンスの生成
+const vendingMachine = new VendingMachine();
+console.log(vendingMachine.money); // 確認用
