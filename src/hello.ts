@@ -127,6 +127,11 @@ class VendingMachine {
   /* このクラスが持つデータに関する処理を書く */
   /* insertMoney()->入金機能 */
   insertMoney(amount: number): void {
+    /* 条件分岐で投入金額の上限を設定 */
+    if (this.money + amount > 1000) {
+      console.log("1000円以上は投入できません");
+      return; // ここで処理終了
+    }
     /* 残高に投入金額(amount)を足して、
     その金額を新たな残高とする */
     this.money += amount;
