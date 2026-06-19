@@ -104,7 +104,7 @@ const products: Product[] = [
 
 // 自動販売機クラスの宣言
 class VendingMachine {
-  /* 合計投入金額の初期値 */
+  /* 残高の初期値 */
   money: number;
   /* 商品を自販機で管理させる */
   products: Product[];
@@ -127,8 +127,8 @@ class VendingMachine {
   /* このクラスが持つデータに関する処理を書く */
   /* insertMoney()->入金機能 */
   insertMoney(amount: number): void {
-    /* 合計投入金額に追加された金額(amount)を足して、
-    その金額を新たな合計投入金額とする */
+    /* 残高に投入金額(amount)を足して、
+    その金額を新たな残高とする */
     this.money += amount;
   }
 
@@ -191,18 +191,28 @@ class VendingMachine {
     // 問題がなければ購入処理へ
     /* 選択商品の在庫を1つ減らす処理 */
     product.decreaseStock();
-    /* 合計投入金額から選択商品の代金を引いて、
-    その値を最新の合計投入金額とする */
+    /* 残高から選択商品の代金を引いて、
+    その値を最新の残高とする */
     this.money -= product.price;
     /* 購入完了メッセージの表示 */
     console.log(`購入成功：${product.name}を購入しました
       \n現在の残高：${this.money}`);
-
-
-
     product.showInfo();
+  }
 
-
+  /* refund()->現在の残高を返金する */
+  refund(): void {
+    /* 残高が0円の時の処理 */
+    if (this.money === 0) {
+      console.log("返金するお金がありません");
+    return; // ここで処理終了
+    }
+    /* 現在の残高を定数refundAmountに格納する */
+    const refundAmount = this.money;
+    /* 残高の金額を0円に更新する */
+    this.money = 0;
+    /* 返金完了メッセージの表示 */
+    console.log(`${refundAmount}円返金しました`);
   }
 
 }
