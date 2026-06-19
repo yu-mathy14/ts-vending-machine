@@ -188,6 +188,18 @@ class VendingMachine {
       return; // ここで処理終了
     }
 
+    // 問題がなければ購入処理へ
+    /* 選択商品の在庫を1つ減らす処理 */
+    product.decreaseStock();
+    /* 合計投入金額から選択商品の代金を引いて、
+    その値を最新の合計投入金額とする */
+    this.money -= product.price;
+    /* 購入完了メッセージの表示 */
+    console.log(`購入成功：${product.name}を購入しました
+      \n現在の残高：${this.money}`);
+
+
+
     product.showInfo();
 
 
