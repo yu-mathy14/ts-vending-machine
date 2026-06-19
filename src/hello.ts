@@ -88,31 +88,66 @@ const products: Product[] = [
   tea,
   coffee
 ];
-// 商品一覧表示
-console.log(""); // 文字なしの行の追加
-console.log("---商品一覧---");
-/* 配列productsの要素を順番に1つずつ取り出して
-  showInfo()メソッドを実行する */
-products.forEach(product => {
-  product.showInfo();
-});
+// // 商品一覧表示
+// console.log(""); // 文字なしの行の追加
+// console.log("---商品一覧---");
+// /* 配列productsの要素を順番に1つずつ取り出して
+//   showInfo()メソッドを実行する */
+// products.forEach(product => {
+//   product.showInfo();
+// });->vendingMachine.showProducts()に置き換える
 
-////////////////////////
-// 自動販売機の動作の管理 //
-////////////////////////
+//////////////////////////////
+// 自動販売機の管理          　//
+// ->自販機が商品全体を管理する //
+/////////////////////////////
 
 // 自動販売機クラスの宣言
 class VendingMachine {
   /* 合計投入金額の初期値 */
   money: number;
+  /* 商品を自販機で管理させる */
+  products: Product[];
 
   // コンストラクタの定義
   /* インスタンス生成直後に自動実行される */
-  constructor() {
+  /* 別のクラスのインスタンス(Productインスタンスの配列products)を
+  このクラス(VendingMachine)に渡す
+  ->VendingMachineがproductsを知っている状態にするため
+  ∵{・商品の一覧を表示する
+    ・商品を探す
+    ・在庫を管理する
+    ・購入処理をする} */
+  constructor(products: Product[]) {
     this.money = 0;
+    this.products = products;
   }
+
+  // メソッドの定義
+  /* このクラスが持つデータに関する処理を書く */
+  /* insertMoney()->入金機能 */
+  insertMoney(amount: number): void {
+    /* 合計投入金額に追加された金額(amount)を足して、
+    その金額を新たな合計投入金額とする */
+    this.money += amount;
+  }
+
+  /* showProducts()->商品一覧表示をする */
+  showProducts(): void {
+    console.log("\n---商品一覧---");
+    /* このクラスに渡された配列productsの要素を
+    順番に1つずつ取り出してshowInfo()メソッドを実行する */
+    this.products.forEach(product => {
+      product.showInfo();
+    });
+  }
+
 }
 
 // VendingMachineクラスのインスタンスの生成
-const vendingMachine = new VendingMachine();
-console.log(vendingMachine.money); // 確認用
+const vendingMachine = new VendingMachine(products);
+// console.log(vendingMachine.money); // 確認用
+
+// vendingMachine.insertMoney(100); // メソッド確認用
+// console.log(vendingMachine.money); // メソッド確認用
+vendingMachine.showProducts(); // メソッド確認用
