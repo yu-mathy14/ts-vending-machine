@@ -172,6 +172,12 @@ class VendingMachine {
       console.log("該当する商品が見つかりません");
       return; // ここで処理終了
     }
+    
+    /* 在庫不足時の処理 */
+    if (product.isSoldOut()) {
+      console.log(`${product.name}は売切です`);
+      return; // ここで処理終了
+    }
 
     /* 残高不足時の処理 */
     if (this.money < product.price){
