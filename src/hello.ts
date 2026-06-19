@@ -1,3 +1,5 @@
+import * as readline from "readline";
+
 console.log("====自動販売機シミュレータ====");
 
 //////////////
@@ -200,8 +202,8 @@ class VendingMachine {
     その値を最新の残高とする */
     this.money -= product.price;
     /* 購入完了メッセージの表示 */
-    console.log(`購入成功：${product.name}を購入しました
-      \n現在の残高：${this.money}`);
+    console.log(`購入成功：${product.name}を購入しました`);
+    console.log(`現在の残高：${this.money}円`);
     product.showInfo();
   }
 
@@ -232,3 +234,106 @@ const vendingMachine = new VendingMachine(products);
 // vendingMachine.insertMoney(100); // メソッド確認用
 // vendingMachine.showBalance(); // メソッド確認用
 // vendingMachine.buyProduct(0); // メソッド確認用
+
+//////////////
+// readline
+//////////////
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+/* 最初のアクション
+   1. 投入金額投入
+   2. 商品一覧表示
+   3. 商品選択
+   を実行するための関数 */
+function startVendingMachine(): void {
+  // 投入金額を入力
+  rl.question(
+    "投入金額を入力してください > ", (money: string) => {
+
+      /* 入力された金額を数値型に変換 */
+      vendingMachine.insertMoney(Number(money));
+      console.log(""); // 文字なしの行の追加
+
+      /* 残高表示のメソッドの実行 */
+      vendingMachine.showBalance();
+      console.log(""); // 文字なしの行の追加
+
+      /* 商品一覧表示のメソッドを実行 */
+      vendingMachine.showProducts();
+      console.log(""); // 文字なしの行の追加
+
+      /* 商品選択の関数を実行 */
+      selectProduct();
+    }
+  );
+}
+
+/* 商品選択の関数 */
+function selectProduct(): void {
+  rl.question(
+    "\n商品番号を入力してください > ",
+    (id: string) => {
+      /* 入力されたidを数値型に変換 */
+      vendingMachine.buyProduct(Number(id));
+      console.log(""); // 文字なしの行の追加
+
+      // 次のアクションを選択する関数の実行
+      nextAction();
+    }
+  );
+}
+
+/* 次のアクションを選択する関数 */
+function nextAction(): void {
+  /* アクションの選択肢を表示 */
+  console.log("\nA : 続けて購入");
+  console.log("B : 残高返却");
+
+  rl.question(
+    "\n選択してください > ",
+    (answer: string) => {
+      /* 入力内容を定数に格納 */
+      /* .toUpperCase()->入力された文字を大文字に変換する */
+      const action = answer.toUpperCase();
+      /* swith(action)->actionの値によって処理を分岐する */
+      switch (action) {
+        /* ユーザーがAを入力した場合の処理 */
+        case "A":
+          /* 残高表示のメソッドを実行 */
+          vendingMachine.showBalance();
+          console.log("");
+          /* 商品一覧表示のメソッドを実行 */
+          vendingMachine.showProducts();
+          /* 商品選択の関数を実行 */
+          selectProduct();
+          break; // switch文の終了
+
+        /* ユーザーがBを入力した場合の処理 */
+        case "B":
+          /* 返金処理のメソッド */
+          vendingMachine.refund();
+          /* 終了時のメッセージの出力 */
+          console.log("\nご利用ありがとうございました");
+
+          /* readlineを閉じる */
+          rl.close();
+          break;
+        
+        /* ユーザーがAでもBでもないものを入力した場合 */
+        default:
+          /* メッセージの出力 */
+          console.log("A または B を入力してください");
+          /* もう一度次のアクションを選択する関数を呼び出す */
+          nextAction();
+      }
+    }
+  );
+}
+
+/* 最初のアクションの関数の実行 */
+startVendingMachine();
+
