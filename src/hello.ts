@@ -147,6 +147,20 @@ class VendingMachine {
     });
   }
 
+  /* buyProduct()->商品を購入する */
+  buyProduct(id: number): void {
+    /* 配列productsの中から条件◇に合う商品を1つ探す */
+    const product = this.products.find(
+      /* ◇ products配列の中から取り出した商品のidと
+      buyProduct()の引数で受け取ったidが一致する*/
+      (product) => {
+        return product.id === id;
+      }
+    );
+
+    console.log(product);
+  }
+
 }
 
 // VendingMachineクラスのインスタンスの生成
@@ -156,5 +170,6 @@ const vendingMachine = new VendingMachine(products);
 // vendingMachine.insertMoney(100); // メソッド確認用
 // console.log(vendingMachine.money); // メソッド確認用
 // vendingMachine.showProducts(); // メソッド確認用
-vendingMachine.insertMoney(100); // メソッド確認用
-vendingMachine.showBalance(); // メソッド確認用
+// vendingMachine.insertMoney(100); // メソッド確認用
+// vendingMachine.showBalance(); // メソッド確認用
+// vendingMachine.buyProduct(0); // メソッド確認用
