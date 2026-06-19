@@ -25,6 +25,26 @@ class Product{
     this.price = price;
     this.stock = stock;
   }
+
+  // メソッドの定義
+  /* このクラスが持つデータに関する処理を書く */
+  /* decreaseStock()->stockを1個減らす */
+  decreaseStock(): void {
+    this.stock--;
+  }
+  
+  /* showInfo()->商品情報を表示する */
+  showInfo(): void {
+    console.log(
+      `No.${this.id}: ${this.name}/${this.price}円(在庫:${this.stock})`
+    );
+  }
+
+  /* isSoldOut()->商品が売切かを判断する
+    在庫が0以下ならtrue, 在庫が1以上ならfalseを返す */
+  isSoldOut(): boolean {
+    return this.stock <= 0;
+  }
 }
 
 // Productクラスのインスタンスの生成
