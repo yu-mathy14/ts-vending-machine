@@ -1,8 +1,8 @@
 console.log("====自動販売機シミュレータ====");
 
-/////////////////
-// 商品一覧の管理
-/////////////////
+//////////////////
+// 商品一覧の管理 //
+//////////////////
 
 
 // 商品クラスの宣言
@@ -54,18 +54,38 @@ const water = new Product(
   100,
   5
 );
-console.log(water); // 確認用
+// console.log(water); // 確認用
 const tea = new Product(
   1,
   "お茶",
   120,
   5
 );
-console.log(tea); // 確認用
+// console.log(tea); // 確認用
 const coffee = new Product(
   2,
   "コーヒー",
   130,
   5
 );
-console.log(coffee); // 確認用
+// console.log(coffee); // 確認用
+
+// water.decreaseStock(); // メソッド確認用
+// water.showInfo(); // メソッド確認用
+// console.log(water.isSoldOut()); // メソッド確認用
+
+// 配列化して商品をまとめて管理する
+// インスタンス化した商品を格納する配列の定義
+const products: Product[] = [
+  water,
+  tea,
+  coffee
+];
+// 商品一覧表示
+console.log(""); // 文字なしの行の追加
+console.log("---商品一覧---");
+/* 配列productsの要素を順番に1つずつ取り出して
+  showInfo()メソッドを実行する */
+products.forEach(product => {
+  product.showInfo();
+});
