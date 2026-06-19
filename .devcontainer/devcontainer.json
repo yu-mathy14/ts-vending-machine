@@ -1,0 +1,22 @@
+{
+  "name": "TypeScript Training",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [3004],
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "formulahendry.code-runner"
+      ],
+      "settings": {
+        "code-runner.executorMap": {
+          "typescript": "npx tsx"
+        },
+        "code-runner.runInTerminal": true
+      }
+    }
+  }
+}
