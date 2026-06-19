@@ -158,7 +158,15 @@ class VendingMachine {
       }
     );
 
-    console.log(product);
+    /* 商品が見つかった時だけshowInfo()を実行する
+    ∵ 存在しない商品idが実行されてもエラーが起きないように */
+    if (product) {
+      product.showInfo();
+    } else {
+    /* id=undefinedの時の処理 */
+      console.log("該当する商品が見つかりません");
+    }
+
   }
 
 }
