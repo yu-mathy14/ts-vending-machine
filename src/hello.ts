@@ -28,9 +28,22 @@ class Product{
 
   // メソッドの定義
   /* このクラスが持つデータに関する処理を書く */
+  /* メソッドの定義順は基本的に実行に影響しないが
+  可読性を踏まえて順番を考えて書くと良い */
+
+  /* isSoldOut()->商品が売切かを判断する
+    在庫が0以下ならtrue, 在庫が1以上ならfalseを返す */
+  isSoldOut(): boolean {
+    return this.stock <= 0;
+  }
+
   /* decreaseStock()->stockを1個減らす */
   decreaseStock(): void {
-    this.stock--;
+    /* 条件分岐で在庫が1以上の時は
+    在庫を1個減らす処理を実行する */
+    if (!this.isSoldOut()) {
+      this.stock--;
+    }
   }
   
   /* showInfo()->商品情報を表示する */
@@ -40,11 +53,6 @@ class Product{
     );
   }
 
-  /* isSoldOut()->商品が売切かを判断する
-    在庫が0以下ならtrue, 在庫が1以上ならfalseを返す */
-  isSoldOut(): boolean {
-    return this.stock <= 0;
-  }
 }
 
 // Productクラスのインスタンスの生成
