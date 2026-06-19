@@ -158,14 +158,32 @@ class VendingMachine {
       }
     );
 
-    /* 商品が見つかった時だけshowInfo()を実行する
-    ∵ 存在しない商品idが実行されてもエラーが起きないように */
-    if (product) {
-      product.showInfo();
-    } else {
-    /* id=undefinedの時の処理 */
+    // /* 商品が見つかった時だけshowInfo()を実行する
+    // ∵ 存在しない商品idが実行されてもエラーが起きないように */
+    // if (product) {
+    //   product.showInfo();
+    // } else {
+    // /* id=undefinedの時の処理 */
+    //   console.log("該当する商品が見つかりません");
+    // }
+
+    /* 商品が存在しない時の処理 */
+    if (!product) {
       console.log("該当する商品が見つかりません");
+      return; // ここで処理終了
     }
+
+    /* 残高不足時の処理 */
+    if (this.money < product.price){
+      console.log(
+        `購入失敗：${product.name}の購入には${
+         product.price - this.money}円不足しています`
+      );
+      return; // ここで処理終了
+    }
+
+    product.showInfo();
+
 
   }
 
