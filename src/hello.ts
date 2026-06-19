@@ -132,6 +132,11 @@ class VendingMachine {
     this.money += amount;
   }
 
+  /* showBalance()->残高を表示する */
+  showBalance(): void {
+    console.log(`残高：${this.money}円`);
+  }
+
   /* showProducts()->商品一覧表示をする */
   showProducts(): void {
     console.log("\n---商品一覧---");
@@ -150,4 +155,6 @@ const vendingMachine = new VendingMachine(products);
 
 // vendingMachine.insertMoney(100); // メソッド確認用
 // console.log(vendingMachine.money); // メソッド確認用
-vendingMachine.showProducts(); // メソッド確認用
+// vendingMachine.showProducts(); // メソッド確認用
+vendingMachine.insertMoney(100); // メソッド確認用
+vendingMachine.showBalance(); // メソッド確認用
