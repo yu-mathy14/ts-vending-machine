@@ -7,7 +7,7 @@ console.log("====自動販売機シミュレータ====");
 //////////////
 
 // 商品クラスの宣言
-class Product{
+class Product {
   readonly id: number;
   name: string;
   price: number;
@@ -50,7 +50,7 @@ class Product{
   /* showInfo()->商品情報を表示する */
   showInfo(): void {
     console.log(
-      `No.${this.id}: ${this.name}/${this.price}円(在庫:${this.stock})`
+      `No.${this.id}: ${this.name}/${this.price}円(在庫: ${this.stock})`
     );
   }
 
