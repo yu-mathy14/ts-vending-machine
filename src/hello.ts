@@ -8,7 +8,7 @@ console.log("====自動販売機シミュレータ====");
 
 // 商品クラスの宣言
 class Product{
-  id: number;
+  readonly id: number;
   name: string;
   price: number;
   stock: number;
@@ -59,22 +59,22 @@ class Product{
 // Productクラスのインスタンスの生成
 const water = new Product(
   0,
-  "水",
+  "ぬる〜い水",
   100,
   5
 );
 // console.log(water); // 確認用
 const tea = new Product(
   1,
-  "お茶",
+  "あつ〜いお茶",
   120,
   5
 );
 // console.log(tea); // 確認用
 const coffee = new Product(
   2,
-  "コーヒー",
-  130,
+  "ちょうどい〜いコーヒー",
+  150,
   5
 );
 // console.log(coffee); // 確認用
